@@ -11,6 +11,7 @@ namespace flappyBirds
 {
     public partial class Form1 : DevExpress.XtraEditors.XtraForm
     {
+    // Değişkenleri oluşturma.
         int engelHizi = 12;
         int gravity = 6;
         int score = 0;
@@ -21,10 +22,12 @@ namespace flappyBirds
 
         private void gameTimerEvent(object sender, EventArgs e)
         {
+        //Resim kutularını ve label'i değişkenlere atama.
             pictureBox2.Top += gravity;
             pictureBox4.Left -= engelHizi;
             pictureBox1.Left -= engelHizi;
             label3.Text = "Score :" +score;
+            //if yapıları ile engelleri hareket ettirme.
             if (pictureBox4.Left < -150)
             {
                 pictureBox4.Left = 1100;
@@ -35,10 +38,12 @@ namespace flappyBirds
                 pictureBox1.Left = 1200;
                 score++;
             }
+            // Oyunun biteceği senaryoları belirleme.
             if (pictureBox2.Bounds.IntersectsWith(pictureBox4.Bounds) || pictureBox2.Bounds.IntersectsWith(pictureBox1.Bounds) || pictureBox2.Bounds.IntersectsWith(pictureBox3.Bounds) || pictureBox2.Bounds.IntersectsWith(panel1.Bounds))
             {
                 endGame();
             }
+            // Skora göre oyuunun hızını artırma.
             if (score > 6)
             {
                 engelHizi = 16;
@@ -64,7 +69,7 @@ namespace flappyBirds
                 engelHizi = 46;
             }
         }
-
+        // Space tuşuna görev atama.
         private void gamekeyisdown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Space)
@@ -73,7 +78,7 @@ namespace flappyBirds
             }
 
         }
-
+        // Space tuşuna görev atama.
         private void gamekeyisup(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Space)
@@ -81,7 +86,7 @@ namespace flappyBirds
                 gravity = 15;
             }
         }
-
+       // Oyun bitirme fonksiyonu.
        private void endGame()
         {
             gameTimer.Stop();
